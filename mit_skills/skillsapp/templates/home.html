@@ -333,7 +333,7 @@
                         <td>{{ skills.Is_Certified }}</td>
                         <td>{{ skills.total_experience }}</td>
                         <td>{{ skills.certifications }}</td>
-                        <td>{{ skills.assessment_date }}</td>
+                        <td>{{ skills.certified_date }}</td>
                         <td>
                             <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal-{{forloop.counter}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -361,7 +361,7 @@
 					<div class="modal-body">					
 						<div class="form-group">
                             
-							<label>Skill Name</label>
+							<label>Skill Name <i class="fa fa-asterisk" style="font-size:10px;color:red"></i></label>
 							<select type="text" name="tSkills_Name" class="form-control" required>
                                 <option value="" disabled selected>--Search Skill Name-- </option>
                                 {% for lists in sklist %}
@@ -371,38 +371,46 @@
                             
 						</div>
 						<div class="form-group">
-							<label>Proficiency</label>
+							<label>Proficiency <i class="fa fa-asterisk" style="font-size:10px;color:red"></i></label>
 							<select type="text" name='tproficiency' class="form-control" required>
+                                <option value="" disabled selected hidden>--Please select an option--</option>
                                 <option value="Expert">Expert</option>
                                 <option value="Intermediate">Intermediate</option>
                                 <option value="Beginner">Beginner</option>
                             </select>
 						</div>
 						<div class="form-group">
-							<label>Are you trained? (Yes/No)</label>
-							<select type="text" name= 'tIs_Trained'class="form-control" required>
+							<label>Are you trained? (Yes/No)<i class="fa fa-asterisk" style="font-size:10px;color:red"></i></label>
+							<select type="text" name= 'tIs_Trained'class="form-control" onchange="yesnoCheck(this);" required>
+                                <option value="" disabled selected hidden>--Please select an option--</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
-                            </select>
+                            </select> 
+                            
 						</div>
+                        <div class="form-group" id="ifYes" style="display: none;">
+                            <label>Training Name</label>
+                            <input type="text" class="form-control" name="ttraining_name" >
+                        </div>
                         <div class="form-group">
-							<label>Are you certified? (Yes/No)</label>
+							<label>Are you certified? (Yes/No)<i class="fa fa-asterisk" style="font-size:10px;color:red"></i></label>
 							<select type="text" name= 'tIs_Certified'class="form-control" required>
+                                <option value="" disabled selected hidden>--Please select an option--</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                             </select>
 						</div>
                         <div class="form-group">
-							<label>Total Experience</label>
+							<label>Total Experience<i class="fa fa-asterisk" style="font-size:10px;color:red"></i></label>
 							<input type="text" name= 'ttotal_experience'class="form-control" required>
 						</div>
                         <div class="form-group">
-							<label>Certifications</label>
+							<label>Certifications<i class="fa fa-asterisk" style="font-size:10px;color:red"></i></label>
 							<input type="text" name= 'tcertifications'class="form-control" required>
 						</div>
                         <div class="form-group">
 							<label>Certificate Achieved on</label>
-							<input type="date" name='tassessment_date' class="form-control" required>
+							<input type="date" name='tcertified_date' class="form-control" required>
 						</div>					
 					</div>
 					<div class="modal-footer">
@@ -429,7 +437,7 @@
                             
 							<label>Skill Name</label>
 							<select type="text" name='tSkills_Name' class="form-control" required>
-                                <option value="" disabled selected>--Search Skill Name-- </option>
+                                <option value="{{skills.Skills_Name_id}}" selected hidden>{{skills.Skills_Name_id}} </option>
                                 {% for lists in sklist %}
                                 <option value="{{lists.Skills_Name}}">{{lists.Skills_Name}}</option>
                                 {% endfor %}
@@ -440,6 +448,7 @@
 						<div class="form-group">
 							<label>Proficiency</label>
 							<select type="text" name='tproficiency' class="form-control" required>
+                                <option value="{{skills.proficiency}}"  selected hidden>{{skills.proficiency}}</option>
                                 <option value="Expert">Expert</option>
                                 <option value="Intermediate">Intermediate</option>
                                 <option value="Beginner">Beginner</option>
@@ -448,13 +457,20 @@
                         <div class="form-group">
                             <label>Are you trained? (Yes/No)</label>
 							<select type="text" name= 'tIs_Trained'class="form-control" required>
+                                <option value="{{skills.Is_Trained}}" selected hidden>{{skills.Is_Trained}}</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
+                            
 						</div>
+                        <div class="form-group" id="ifYes" style="display: none;">
+                            <label>Training Name</label> 
+                            <input type="text" class="form-control" name="ttraining_name" value="{{skills.training_name}}"/>
+                        </div>
                         <div class="form-group">
 							<label>Are you certified? (Yes/No)</label>
 							<select type="text" name= 'tIs_Certified'class="form-control" required>
+                                <option value="{{skills.Is_Certified}}" selected hidden>{{skills.Is_Certified}}</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                             </select>
@@ -469,7 +485,7 @@
 						</div>
                         <div class="form-group">
 							<label>Certificate Achieved on</label>
-							<input name="tassessment_date" value="{{skills.assessment_date}}" type="date" class="form-control" required>
+							<input name="tcertified_date" placeholder="{{skills.certified_date}}"value="{{skills.certified_date}}" type="date" class="form-control" required>
 						</div>
                         		
 					</div>
@@ -531,5 +547,13 @@
 		}
 	});
     });
+    function yesnoCheck(that) {
+        if (that.value == "yes") {
+      alert("checking purpose");
+            document.getElementById("ifYes").style.display = "block";
+        } else {
+            document.getElementById("ifYes").style.display = "none";
+        }
+    }
 </script>
 </html>

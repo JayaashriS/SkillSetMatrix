@@ -22,10 +22,11 @@ class Skillsmatrix(models.Model):
     username=models.ForeignKey(Member,on_delete=models.CASCADE)
     proficiency= models.CharField(max_length=200)
     Is_Trained=models.CharField(max_length=4)
+    training_name=models.CharField(max_length=30,default=None)
     Is_Certified=models.CharField(max_length=4)
     total_experience=models.CharField(max_length=10)
     certifications=models.CharField(max_length=100)
-    assessment_date=models.DateField(auto_now=False, auto_now_add= False,blank= True, null=True)
+    certified_date=models.DateField(auto_now=False, auto_now_add= False,blank= True, default=None)
 
     updated_at=models.DateTimeField(auto_now=True)
     

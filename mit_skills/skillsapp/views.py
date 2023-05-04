@@ -98,7 +98,8 @@ def add(request):
         Is_Certified=request.POST.get('tIs_Certified')
         total_experience=request.POST.get('ttotal_experience')
         certifications=request.POST.get('tcertifications')
-        assessment_date=request.POST.get('tassessment_date')
+        certified_date=request.POST.get('tcertified_date')
+        training_name=request.POST.get('ttraining_name')
         usernameobj=Member.objects.get(username=username)
         skill=Skillsmatrix(
              
@@ -107,7 +108,8 @@ def add(request):
             Is_Certified=Is_Certified,
             total_experience=total_experience,
             certifications=certifications, 
-            assessment_date=assessment_date,
+            certified_date=certified_date,
+            training_name=training_name,
             username=usernameobj,
             Skills_Name=Skills_Nameobj)
         skill.save()
@@ -131,7 +133,8 @@ def update(request):
         Is_Certified=request.POST.get('tIs_Certified')
         total_experience=request.POST.get('ttotal_experience')
         certifications=request.POST.get('tcertifications')
-        assessment_date=request.POST.get('tassessment_date')
+        certified_date=request.POST.get('tcertified_date')
+        training_name=request.POST.get('ttraining_name')
         #created_Date=Skillsmatrix.objects.filter(id=id)
         usernameobj=Member.objects.get(username=username)
         
@@ -144,7 +147,8 @@ def update(request):
             Is_Certified=Is_Certified,
             total_experience=total_experience,
             certifications=certifications, 
-            assessment_date=assessment_date,
+            certified_date=certified_date,
+            training_name=training_name,
             username=usernameobj,
             Skills_Name=Skills_Nameobj,
             
