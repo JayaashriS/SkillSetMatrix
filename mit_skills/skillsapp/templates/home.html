@@ -456,14 +456,14 @@
                         </div>
                         <div class="form-group">
                             <label>Are you trained? (Yes/No)</label>
-							<select type="text" name= 'tIs_Trained'class="form-control" required>
+							<select type="text" name= 'tIs_Trained'class="form-control"  required>
                                 <option value="{{skills.Is_Trained}}" selected hidden>{{skills.Is_Trained}}</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
                             
 						</div>
-                        <div class="form-group" id="ifYes" style="display: none;">
+                        <div class="form-group">
                             <label>Training Name</label> 
                             <input type="text" class="form-control" name="ttraining_name" value="{{skills.training_name}}"/>
                         </div>
